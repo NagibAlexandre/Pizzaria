@@ -13,7 +13,7 @@
 </head>
 
 <body>
-
+    <?php session_start(); ?>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="../index.php">
@@ -29,14 +29,20 @@
                         <a class="nav-link active" aria-current="page" href="../index.php">Início</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Cardápio</a>
+                        <a class="nav-link" href="cardapio.php">Cardápio</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="quemSomos.php">Quem Somos</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login/login.php">Login</a>
-                    </li>
+                    <?php if (isset($_SESSION['usuario'])): ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/pages/account/logout.php">Sair</a>
+                        </li>
+                    <?php else: ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/pages/account/login.php">Login</a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
@@ -46,11 +52,13 @@
         <h1>Nosso Cardápio</h1>
     </div>
 
+    <!-- Grid de Pizzas -->
     <div class="pizza-grid-wrapper">
         <div class="container">
             <div class="row">
                 <?php
-                $pdo = new PDO('mysql:host=localhost;dbname=pizza', 'root', 'SNajainiBdCabuloso1!!');
+                require_once __DIR__ . '/../config.php'; // ajuste o caminho conforme a estrutura do seu projeto
+
                 $pizzas = $pdo->query("SELECT * FROM pizzas");
 
                 foreach ($pizzas as $pizza) {
