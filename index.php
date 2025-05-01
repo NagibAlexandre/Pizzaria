@@ -26,7 +26,7 @@
             <a class="nav-link active" aria-current="page" href="#">Início</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Cardápio</a>
+            <a class="nav-link" href="/pages/cardapio.php">Cardápio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Quem Somos</a>
@@ -73,66 +73,26 @@
 
   <div class="pizza-grid-wrapper">
     <div class="pizza-grid">
-      <div class="pizza-block">
-        <img src="/images/pizza1.jpg" class="pizza-img" alt="Pizza 1">
-        <div class="pizza-name">Pizza Margherita</div>
-        <div class="pizza-size">Tamanho: Média</div>
-        <div class="pizza-price">R$ 39,90</div>
-        <button class="add-to-cart-btn">Adicionar ao Carrinho</button>
-      </div>
-      <div class="pizza-block">
-        <img src="/images/pizza2.jpg" class="pizza-img" alt="Pizza 2">
-        <div class="pizza-name">Pizza Calabresa</div>
-        <div class="pizza-size">Tamanho: Grande</div>
-        <div class="pizza-price">R$ 45,90</div>
-        <button class="add-to-cart-btn">Adicionar ao Carrinho</button>
-      </div>
-      <div class="pizza-block">
-        <img src="/images/pizza3.jpg" class="pizza-img" alt="Pizza 3">
-        <div class="pizza-name">Pizza Quatro Queijos</div>
-        <div class="pizza-size">Tamanho: Pequena</div>
-        <div class="pizza-price">R$ 35,90</div>
-        <button class="add-to-cart-btn">Adicionar ao Carrinho</button>
-      </div>
-      <div class="pizza-block">
-        <img src="/images/pizza4.jpg" class="pizza-img" alt="Pizza 4">
-        <div class="pizza-name">Pizza Portuguesa</div>
-        <div class="pizza-size">Tamanho: Grande</div>
-        <div class="pizza-price">R$ 47,90</div>
-        <button class="add-to-cart-btn">Adicionar ao Carrinho</button>
-      </div>
-      <div class="pizza-block">
-        <img src="/images/pizza5.jpg" class="pizza-img" alt="Pizza 5">
-        <div class="pizza-name">Pizza Frango com Catupiry</div>
-        <div class="pizza-size">Tamanho: Média</div>
-        <div class="pizza-price">R$ 42,90</div>
-        <button class="add-to-cart-btn">Adicionar ao Carrinho</button>
-      </div>
-      <div class="pizza-block">
-        <img src="/images/pizza6.jpg" class="pizza-img" alt="Pizza 6">
-        <div class="pizza-name">Pizza Pepperoni</div>
-        <div class="pizza-size">Tamanho: Grande</div>
-        <div class="pizza-price">R$ 49,90</div>
-        <button class="add-to-cart-btn">Adicionar ao Carrinho</button>
-      </div>
-      <div class="pizza-block">
-        <img src="/images/pizza7.jpg" class="pizza-img" alt="Pizza 7">
-        <div class="pizza-name">Pizza Frutos do Mar</div>
-        <div class="pizza-size">Tamanho: Grande</div>
-        <div class="pizza-price">R$ 54,90</div>
-        <button class="add-to-cart-btn">Adicionar ao Carrinho</button>
-      </div>
-      <div class="pizza-block">
-        <img src="/images/pizza8.jpg" class="pizza-img" alt="Pizza 8">
-        <div class="pizza-name">Pizza Vegana</div>
-        <div class="pizza-size">Tamanho: Pequena</div>
-        <div class="pizza-price">R$ 38,90</div>
-        <button class="add-to-cart-btn">Adicionar ao Carrinho</button>
-      </div>
+      <?php
+      $pdo = new PDO('mysql:host=localhost;dbname=pizza', 'root', 'SNajainiBdCabuloso1!!');
+      $pizzas = $pdo->query("SELECT * FROM pizzas LIMIT 8");
+
+      foreach ($pizzas as $pizza) {
+        echo '
+    <div class="pizza-block">
+      <img src="/images/' . $pizza['abreviacao'] . '.jpg" class="pizza-img" alt="' . $pizza['nome'] . '">
+      <div class="pizza-name">' . $pizza['nome'] . '</div>
+      <div class="pizza-description">' . $pizza['descricao'] . '</div>
+      <button class="add-to-cart-btn">Adicionar ao Carrinho</button>
+    </div>';
+      }
+      ?>
     </div>
+
+
   </div>
 
-  <footer class="footer">
+  <footer class="footer text-center mt-5">
     <p>&copy; 2025 Pizzaria. Todos os direitos reservados.</p>
   </footer>
 
