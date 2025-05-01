@@ -14,7 +14,6 @@
 
 <body>
 
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="../index.php">
@@ -33,22 +32,20 @@
                         <a class="nav-link" href="#">Cardápio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Quem Somos</a>
+                        <a class="nav-link" href="quemSomos.php">Quem Somos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Login</a>
+                        <a class="nav-link" href="login/login.php">Login</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Imagem Estática do Cardápio -->
     <div class="menu-image">
         <h1>Nosso Cardápio</h1>
     </div>
 
-    <!-- Grid de Pizzas -->
     <div class="pizza-grid-wrapper">
         <div class="container">
             <div class="row">
@@ -72,9 +69,8 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="footer text-center mt-5">
-        <p>&copy; 2025 Pizzaria. Todos os direitos reservados.</p>
+        <p>&copy; 2025 Pizzaria. Todos os direitos reservados. Puc Minas Coração Eucarísitico</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

@@ -29,10 +29,10 @@
             <a class="nav-link" href="/pages/cardapio.php">Cardápio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Quem Somos</a>
+            <a class="nav-link" href="/pages/quemSomos.php">Quem Somos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Login</a>
+            <a class="nav-link" href="/pages/login/login.php">Login</a>
           </li>
         </ul>
       </div>
@@ -88,12 +88,10 @@
       }
       ?>
     </div>
-
-
   </div>
 
   <footer class="footer text-center mt-5">
-    <p>&copy; 2025 Pizzaria. Todos os direitos reservados.</p>
+    <p>&copy; 2025 Pizzaria. Todos os direitos reservados. Puc Minas Coração Eucarísitico</p>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
