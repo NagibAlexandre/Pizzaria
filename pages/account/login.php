@@ -36,6 +36,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <link rel="stylesheet" href="/styles/style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body,
+    html {
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .login-wrapper {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+  </style>
+
 </head>
 
 <body>
@@ -75,15 +97,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
   </nav>
 
-  <form method="POST">
-    <input type="email" name="email" placeholder="Email" required><br>
-    <input type="password" name="senha" placeholder="Senha" required><br>
-    <button type="submit">Entrar</button>
-  </form>
+<div class="login-wrapper">
+    <div class="card p-4 shadow-lg rounded-4" style="max-width: 400px; width: 100%;">
+      <h3 class="text-center mb-4">Login</h3>
 
-  <a href="cadastro.php">Não tem cadastro?</a>
+      <?php if (isset($erro)) echo "<div class='alert alert-danger text-center'>$erro</div>"; ?>
 
-  <?php if (isset($erro)) echo "<p style='color:red;'>$erro</p>"; ?>
+      <form method="POST">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" name="email" class="form-control" id="email" placeholder="Digite seu email" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="senha" class="form-label">Senha</label>
+          <input type="password" name="senha" class="form-control" id="senha" placeholder="Digite sua senha" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 ">Entrar</button>
+      </form>
+
+      <div class="text-center mt-3">
+        <a href="cadastro.php">Não tem cadastro? <strong>Crie agora</strong></a>
+      </div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 

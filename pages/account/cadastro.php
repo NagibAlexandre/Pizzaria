@@ -1,39 +1,100 @@
 <?php
+session_start();
 
 if (isset($_SESSION['usuario'])) {
-  header("../../index.php");
+  header("Location: ../../index.php");
   exit();
 }
 
 require_once __DIR__ . '/../../config.php';
 
+$erro = "";
+$sucesso = "";
+$nome = $email = $telefone = $endereco = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $nome = $_POST['nome'];
   $email = $_POST['email'];
-  $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
   $telefone = $_POST['telefone'];
   $endereco = $_POST['endereco'];
+  $senha = $_POST['senha'];
+  $confirmar_senha = $_POST['confirmar_senha'];
 
-  $stmt = $pdo->prepare("INSERT INTO usuarios (nome, email, senha, telefone, endereco) VALUES (?, ?, ?, ?, ?)");
-  $stmt->execute([$nome, $email, $senha, $telefone, $endereco]);
+  // Verificar se as senhas coincidem
+  if ($senha !== $confirmar_senha) {
+    $erro = "As senhas não coincidem.";
+  } else {
+    // Verificar se o email já está cadastrado
+    $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE email = ?");
+    $stmt->execute([$email]);
+    $usuarioExistente = $stmt->fetch();
 
-  echo "Cadastro realizado com sucesso!";
+    if ($usuarioExistente) {
+      $erro = "Este email já está cadastrado.";
+    } else {
+      // Se as senhas coincidem e o email não existe, então salva o usuário
+      $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
+      try {
+        $stmt = $pdo->prepare("INSERT INTO usuarios (nome, email, senha, telefone, endereco) VALUES (?, ?, ?, ?, ?)");
+        if ($stmt->execute([$nome, $email, $senha_hash, $telefone, $endereco])) {
+          $sucesso = "Cadastro realizado com sucesso!";
+          // Limpar os campos após sucesso
+          $nome = $email = $telefone = $endereco = "";
+        } else {
+          $erro = "Erro ao cadastrar. Tente novamente.";
+        }
+      } catch (PDOException $e) {
+        $erro = "Erro ao cadastrar: " . $e->getMessage();
+      }
+    }
+  }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Quem Somos - Pizzaria</title>
+  <title>Cadastro - Pizzaria</title>
   <link rel="stylesheet" href="/styles/style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body,
+    html {
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .form-wrapper {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f8f9fa;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 400px;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .container-form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+  </style>
 </head>
 
 <body>
-  <?php session_start(); ?>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="../../index.php">
@@ -68,12 +129,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
   </nav>
 
+  <div class="container-form">
+    <div class="card">
+      <h4 class="mb-4 text-center">Cadastro</h4>
 
-  <form method="POST">
-    <input type="text" name="nome" placeholder="Nome" required><br>
-    <input type="email" name="email" placeholder="Email" required><br>
-    <input type="password" name="senha" placeholder="Senha" required><br>
-    <input type="text" name="telefone" placeholder="Telefone" required><br>
-    <input type="text" name="endereco" placeholder="Endereço" required><br>
-    <button type="submit">Cadastrar</button>
-  </form>
+      <?php if ($erro) echo "<div class='alert alert-danger'>$erro</div>"; ?>
+      <?php if ($sucesso) echo "<div class='alert alert-success'>$sucesso</div>"; ?>
+
+      <form method="POST">
+        <div class="mb-3">
+          <label for="nome" class="form-label">Nome</label>
+          <input class="form-control" type="text" name="nome" id="nome" placeholder="Nome" value="<?= htmlspecialchars($nome) ?>" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input class="form-control" type="email" name="email" id="email" placeholder="Email" value="<?= htmlspecialchars($email) ?>" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="telefone" class="form-label">Telefone</label>
+          <input class="form-control" type="text" name="telefone" id="telefone" placeholder="Telefone" value="<?= htmlspecialchars($telefone) ?>" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="endereco" class="form-label">Endereço</label>
+          <input class="form-control" type="text" name="endereco" id="endereco" placeholder="Endereço" value="<?= htmlspecialchars($endereco) ?>" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="senha" class="form-label">Senha</label>
+          <input class="form-control" type="password" name="senha" id="senha" placeholder="Senha" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="confirmar_senha" class="form-label">Confirmar Senha</label>
+          <input class="form-control" type="password" name="confirmar_senha" id="confirmar_senha" placeholder="Confirmar Senha" required>
+        </div>
+
+        <button class="btn btn-primary w-100" type="submit">Cadastrar</button>
+      </form>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
