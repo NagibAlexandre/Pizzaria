@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/styles/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="/scripts/carrinho.js"></script>
 </head>
 
 <body>
@@ -31,6 +32,12 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="quemSomos.php">Quem Somos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link position-relative <?php echo !isset($_SESSION['usuario']) ? 'disabled' : ''; ?>" href="#" onclick="<?php echo isset($_SESSION['usuario']) ? 'abrirCarrinho()' : ''; ?>">
+                            <i class="bi bi-cart"></i> Carrinho
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="contadorCarrinho">0</span>
+                        </a>
                     </li>
                     <?php if (isset($_SESSION['usuario'])): ?>
                         <li class="nav-item">
@@ -96,6 +103,49 @@
 
         </div>
     </div>
+
+
+    <div class="modal fade" id="modalTamanho" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">Escolher Tamanho</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="imagemTamanhoPizza" src="/images/tamanhos/brotinho.jpg" class="img-fluid mb-3" alt="Tamanho da pizza">
+                    <p id="nomePizzaModal"></p>
+                    <select id="tamanhoSelecionado" class="form-select">
+                        <option value="brotinho" data-preco="25">Brotinho - R$25</option>
+                        <option value="media" data-preco="50">Média - R$50</option>
+                        <option value="familia" data-preco="75">Família - R$75</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" onclick="adicionarCarrinho()">Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalCarrinho" tabindex="-1" aria-labelledby="carrinhoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="carrinhoLabel">Seu Carrinho</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <ul id="listaCarrinho" class="list-group mb-3"></ul>
+                    <h5>Total: R$ <span id="totalCarrinho">0.00</span></h5>
+                </div>
+                <div class="modal-footer">
+                    <button id="finalizarCompraBtn" class="btn btn-primary">Finalizar Pedido</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <footer class="footer bg-light text-center py-4 mt-5">
         <p>&copy; 2025 Pizzaria. Todos os direitos reservados.</p>

@@ -115,6 +115,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <li class="nav-item">
             <a class="nav-link" href="../quemSomos.php">Quem Somos</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link position-relative <?php echo !isset($_SESSION['usuario']) ? 'disabled' : ''; ?>" href="#" onclick="<?php echo isset($_SESSION['usuario']) ? 'abrirCarrinho()' : ''; ?>">
+              <i class="bi bi-cart"></i> Carrinho
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="contadorCarrinho">0</span>
+            </a>
+          </li>
           <?php if (isset($_SESSION['usuario'])): ?>
             <li class="nav-item">
               <a class="nav-link" href="logout.php">Sair</a>

@@ -18,7 +18,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   if ($usuario && password_verify($senha, $usuario['senha'])) {
     $_SESSION['usuario'] = $usuario;
-    header("Location: ../../index.php");
+
+    echo "<script>
+      sessionStorage.setItem('usuarioLogado', 'true');
+      window.location.href = '../../index.php';
+    </script>";
     exit();
   } else {
     $erro = "Email ou senha incorretos.";
@@ -36,6 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <link rel="stylesheet" href="/styles/style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <script src="../../scripts/carrinho.js"></script>
 
   <style>
     body,
@@ -87,6 +92,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <li class="nav-item">
               <a class="nav-link" href="logout.php">Sair</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link position-relative <?php echo !isset($_SESSION['usuario']) ? 'disabled' : ''; ?>" href="#" onclick="<?php echo isset($_SESSION['usuario']) ? 'abrirCarrinho()' : ''; ?>">
+                <i class="bi bi-cart"></i> Carrinho
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="contadorCarrinho">0</span>
+              </a>
+            </li>
           <?php else: ?>
             <li class="nav-item">
               <a class="nav-link" href="login.php">Login</a>
@@ -97,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
   </nav>
 
-<div class="login-wrapper">
+  <div class="login-wrapper">
     <div class="card p-4 shadow-lg rounded-4" style="max-width: 400px; width: 100%;">
       <h3 class="text-center mb-4">Login</h3>
 
@@ -122,6 +133,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
     </div>
   </div>
+
+
+  <div class="modal fade" id="modalTamanho" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLabel">Escolher Tamanho</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <p id="nomePizzaModal"></p>
+          <select id="tamanhoSelecionado" class="form-select">
+            <option value="brotinho" data-preco="25">Brotinho - R$25</option>
+            <option value="media" data-preco="50">Média - R$50</option>
+            <option value="familia" data-preco="75">Família - R$75</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success" onclick="adicionarCarrinho()">Adicionar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalCarrinho" tabindex="-1" aria-labelledby="carrinhoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="carrinhoLabel">Seu Carrinho</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <ul id="listaCarrinho" class="list-group mb-3"></ul>
+          <h5>Total: R$ <span id="totalCarrinho">0.00</span></h5>
+        </div>
+        <div class="modal-footer">
+          <button id="finalizarCompraBtn" class="btn btn-primary">Finalizar Pedido</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
