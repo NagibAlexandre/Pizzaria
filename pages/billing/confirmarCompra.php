@@ -1,3 +1,12 @@
+<?php
+session_start();
+require_once '../../config.php';
+
+if (!isset($_SESSION['usuario'])) {
+  header("Location: /pages/account/login.php");
+  exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -37,7 +46,7 @@
 <body>
   <!-- Link para voltar ao Índice -->
   <a href="/index.php" class="btn btn-primary btn-retorno">Voltar ao Índice</a>
-  
+
   <div class="container py-5 d-flex justify-content-center align-items-center min-vh-100">
     <div class="col-12 col-md-8">
       <h2 class="mb-4 text-center">Finalizar Pedido</h2>

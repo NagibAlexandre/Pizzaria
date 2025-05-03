@@ -51,6 +51,12 @@ session_start(); // Coloque isso bem no início do arquivo!
             </a>
           </li>
 
+          <li class="nav-item">
+            <a class="nav-link <?php echo !isset($_SESSION['usuario']) ? 'disabled' : ''; ?>" href="/pages/perfil.php">
+              <i class="bi bi-person"></i> Perfil
+            </a>
+          </li>
+
           <?php if (isset($_SESSION['usuario'])): ?>
             <li class="nav-item">
               <a class="nav-link" href="/pages/account/logout.php">Sair</a>
@@ -64,6 +70,7 @@ session_start(); // Coloque isso bem no início do arquivo!
       </div>
     </div>
   </nav>
+
 
   <div class="carousel-wrapper">
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">

@@ -1,4 +1,13 @@
 <?php
+
+session_start();
+require_once '../../config.php';
+
+if (!isset($_SESSION['usuario'])) {
+    header("Location: /pages/account/login.php");
+    exit();
+}
+
 require_once '../../vendor/autoload.php';
 
 \Stripe\Stripe::setApiKey('sk_test_51RKOuIIetkxqAOVDJe63jaQoXUEKIGGrxWIkpd7lMawpbq5hmQekVk2wfHX0adoI0LqSzIx4cG2pHNwkKhYFw2R600LfHisOee');
@@ -66,4 +75,3 @@ $session = \Stripe\Checkout\Session::create([
 
 header("Location: " . $session->url);
 exit;
-?>

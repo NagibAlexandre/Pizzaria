@@ -1,4 +1,11 @@
 <?php
+session_start();
+require_once '../../config.php';
+
+if (!isset($_SESSION['usuario'])) {
+    header("Location: /pages/account/login.php");
+    exit();
+}
 require_once '../../config.php';
 
 $stmt = $pdo->prepare("SELECT endereco_entrega FROM recibos WHERE id_usuario = ? ORDER BY id DESC LIMIT 1");

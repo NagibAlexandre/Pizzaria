@@ -1,4 +1,13 @@
 <?php
+
+session_start();
+require_once '../../config.php';
+
+if (!isset($_SESSION['usuario'])) {
+    header("Location: /pages/account/login.php");
+    exit();
+}
+
 require_once '../../vendor/autoload.php';
 require_once '../../config.php';
 
