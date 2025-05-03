@@ -1,3 +1,6 @@
+<?php
+session_start(); // Coloque isso bem no início do arquivo!
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -9,10 +12,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <script src="/scripts/carrinho.js"></script>
+    <script>
+        const usuarioLogado = <?php echo isset($_SESSION['usuario']) ? 'true' : 'false'; ?>;
+    </script>
 </head>
 
 <body>
-    <?php session_start(); ?>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="../index.php">

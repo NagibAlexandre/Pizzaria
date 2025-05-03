@@ -1,4 +1,4 @@
-let carrinho = JSON.parse(localStorage.getItem("carrinho")) || []; 
+let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 let produtoAtual = null;
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -23,11 +23,17 @@ function verificarLogin() {
 }
 
 function abrirModal(produto) {
+  if (!usuarioLogado) {
+    alert("Você precisa estar logado para adicionar itens ao carrinho.");
+    return;
+  }
+
   produtoAtual = produto;
   document.getElementById("imagemTamanhoPizza").src = "/images/tamanhos/brotinho.jpg"; // valor inicial
   document.getElementById("nomePizzaModal").innerText = produto.nome;
   new bootstrap.Modal(document.getElementById("modalTamanho")).show();
 }
+
 
 function adicionarCarrinho() {
   const select = document.getElementById("tamanhoSelecionado");
@@ -127,6 +133,18 @@ function removerItem(index) {
     const modalEl = document.getElementById("modalCarrinho");
     const modal = bootstrap.Modal.getInstance(modalEl);
     if (modal) modal.hide();
+
+    setTimeout(() => {
+      document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+
+      document.body.classList.remove('modal-open');
+      document.body.style.overflow = 'auto';
+      document.body.style.paddingRight = '';
+
+      modalEl.classList.remove('show');
+      modalEl.style.display = 'none';
+      modalEl.setAttribute('aria-hidden', 'true');
+    }, 350);
   } else {
     abrirCarrinho();
   }
