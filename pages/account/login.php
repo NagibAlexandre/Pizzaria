@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     echo "<script>
       sessionStorage.setItem('usuarioLogado', 'true');
-      window.location.href = '../../index.php';
+      window.location.href = '/index.php';
     </script>";
     exit();
   } else {
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <link rel="stylesheet" href="/styles/style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-  <script src="../../scripts/carrinho.js"></script>
+  <script src="/scripts/carrinho.js"></script>
 
   <style>
     body,
@@ -67,10 +67,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
 
-  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="../../index.php">
+      <a class="navbar-brand" href="/index.php">
         <img src="logo.png" alt="Logo da Pizzaria" style="width: 100px;">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -85,27 +84,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="../../index.php">Início</a>
+            <a class="nav-link active" aria-current="page" href="/index.php">Início</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../cardapio.php">Cardápio</a>
+            <a class="nav-link" href="/pages/cardapio.php">Cardápio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../quemSomos.php">Quem Somos</a>
+            <a class="nav-link" href="/pages/quemSomos.php">Quem Somos</a>
           </li>
+
           <?php if (isset($_SESSION['usuario'])): ?>
             <li class="nav-item">
-              <a class="nav-link" href="logout.php">Sair</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link position-relative <?php echo !isset($_SESSION['usuario']) ? 'disabled' : ''; ?>" href="#" onclick="<?php echo isset($_SESSION['usuario']) ? 'abrirCarrinho()' : ''; ?>">
-                <i class="bi bi-cart"></i> Carrinho
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="contadorCarrinho">0</span>
-              </a>
+              <a class="nav-link" href="/pages/account/logout.php">Sair</a>
             </li>
           <?php else: ?>
             <li class="nav-item">
-              <a class="nav-link" href="login.php">Login</a>
+              <a class="nav-link" href="/pages/account/login.php">Login</a>
             </li>
           <?php endif; ?>
         </ul>

@@ -20,7 +20,7 @@ session_start(); // Coloque isso bem no início do arquivo!
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="/index.php">
         <img src="logo.png" alt="Logo da Pizzaria" style="width: 100px;">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -35,7 +35,7 @@ session_start(); // Coloque isso bem no início do arquivo!
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Início</a>
+            <a class="nav-link active" aria-current="page" href="/index.php">Início</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/pages/cardapio.php">Cardápio</a>

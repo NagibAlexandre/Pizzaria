@@ -19,8 +19,8 @@ foreach ($produtos as $produto) {
     $total += $produto->preco;
 }
 
-$sql = "INSERT INTO recibos (produtos_comprados, id_usuario, endereco_entrega, valor) 
-        VALUES (?, ?, ?, ?)";
+$sql = "INSERT INTO recibos (produtos_comprados, id_usuario, endereco_entrega, valor, forma_pagamento) 
+        VALUES (?, ?, ?, ?, 'cartão')";
 
 $stmt = $pdo->prepare($sql);
 

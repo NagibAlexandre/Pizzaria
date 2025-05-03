@@ -95,7 +95,7 @@ function logout() {
 
   sessionStorage.removeItem("usuarioLogado");
 
-  window.location.href = "../../index.php";
+  window.location.href = "/index.php";
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const emSubpasta = path.includes("/pages");
 
-      const basePath = emSubpasta ? "../images/tamanhos" : "/images/tamanhos";
+      const basePath = emSubpasta ? "/images/tamanhos" : "/images/tamanhos";
 
       switch (this.value) {
         case "brotinho":

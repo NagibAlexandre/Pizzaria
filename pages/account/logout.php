@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['usuario'])) {
-    header("Location: ../../index.php");
+    header("Location: /index.php");
     exit();
 }
 
@@ -30,7 +30,7 @@ if (isset($_COOKIE['carrinho'])) {
 <body>
     <script>
         localStorage.removeItem('carrinho');
-        window.location.href = '../../index.php';
+        window.location.href = '/index.php';
     </script>
 </body>
 </html>

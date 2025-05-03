@@ -20,7 +20,7 @@ session_start(); // Coloque isso bem no início do arquivo!
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../index.php">
+            <a class="navbar-brand" href="/index.php">
                 <img src="logo.png" alt="Logo da Pizzaria" style="width: 100px;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -35,21 +35,22 @@ session_start(); // Coloque isso bem no início do arquivo!
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="../index.php">Início</a>
+                        <a class="nav-link active" aria-current="page" href="/index.php">Início</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="cardapio.php">Cardápio</a>
+                        <a class="nav-link" href="/pages/cardapio.php">Cardápio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="quemSomos.php">Quem Somos</a>
+                        <a class="nav-link" href="/pages/quemSomos.php">Quem Somos</a>
                     </li>
-                    <li class="nav-item">
+
                     <li class="nav-item">
                         <a class="nav-link position-relative <?php echo !isset($_SESSION['usuario']) ? 'disabled' : ''; ?>" href="#" onclick="<?php echo isset($_SESSION['usuario']) ? 'abrirCarrinho()' : ''; ?>">
                             <i class="bi bi-cart"></i> Carrinho
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="contadorCarrinho">0</span>
                         </a>
                     </li>
+
                     <?php if (isset($_SESSION['usuario'])): ?>
                         <li class="nav-item">
                             <a class="nav-link" href="/pages/account/logout.php">Sair</a>
