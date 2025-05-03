@@ -80,6 +80,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
+            <a class="nav-link" href="#" id="toggleTheme" title="Alternar tema">
+              <i id="themeIcon" class="bi bi-sun-fill"></i>
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="../../index.php">Início</a>
           </li>
           <li class="nav-item">
@@ -177,7 +182,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
+  <script src="/scripts/togglemode.js"></script>
 </body>
 
 </html>
