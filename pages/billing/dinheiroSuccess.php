@@ -29,12 +29,11 @@ $sql = "INSERT INTO recibos (produtos_comprados, id_usuario, endereco_entrega, v
 $stmt = $pdo->prepare($sql);
 $stmt->execute([
     json_encode($produtos, JSON_UNESCAPED_UNICODE),
-    1, // ajuste com o id real do usuário, se tiver login
+    $_SESSION['usuario']['id'],
     $endereco,
     $total
 ]);
 
-// Redirecionar para a página de acompanhamento após o sucesso
 header("Location: acompanhar.php");
 exit();
 

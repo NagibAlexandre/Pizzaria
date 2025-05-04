@@ -1,0 +1,1 @@
+Para o site funcionar é preciso acessar o arquivo config.php e colocar o seu banco de dados, incluindo senha e usuário.

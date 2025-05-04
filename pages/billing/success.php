@@ -35,7 +35,7 @@ $stmt = $pdo->prepare($sql);
 
 $stmt->execute([
     json_encode($produtos, JSON_UNESCAPED_UNICODE),
-    1,
+    $_SESSION['usuario']['id'],
     $endereco,
     $total
 ]);
