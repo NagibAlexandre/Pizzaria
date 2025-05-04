@@ -21,7 +21,7 @@ session_start(); // Coloque isso bem no início do arquivo!
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="/index.php">
-                <img src="logo.png" alt="Logo da Pizzaria" style="width: 100px;">
+                <img id="siteLogo" alt="Logo da Pizzaria" style="width: 100px;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
@@ -79,7 +79,7 @@ session_start(); // Coloque isso bem no início do arquivo!
                     echo '
           <div class="col-md-3 mb-4">
             <div class="pizza-block text-center">
-              <img src="/images/' . $pizza['abreviacao'] . '.jpg" class="pizza-img img-fluid" alt="' . $pizza['nome'] . '">
+              <img src="/images/pizzas/' . $pizza['abreviacao'] . '.jpg" class="pizza-img img-fluid" alt="' . $pizza['nome'] . '">
               <div class="pizza-name">' . $pizza['nome'] . '</div>
               <div class="pizza-description">' . $pizza['descricao'] . '</div>
               <button class="btn btn-primary mt-2" onclick="abrirModal(' . htmlspecialchars(json_encode($pizza), ENT_QUOTES, 'UTF-8') . ')">Adicionar ao Carrinho</button>
@@ -99,7 +99,7 @@ session_start(); // Coloque isso bem no início do arquivo!
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
                 <div class="modal-body">
-                    <img id="imagemTamanhoPizza" src="/images/tamanhos/brotinho.jpg" class="img-fluid mb-3" alt="Tamanho da pizza">
+                    <img id="imagemTamanhoPizza" src="/images/tamanhos/brotinho.png" class="img-fluid mb-3" alt="Tamanho da pizza">
                     <p id="nomePizzaModal"></p>
                     <select id="tamanhoSelecionado" class="form-select">
                         <option value="brotinho" data-preco="25">Brotinho - R$25</option>
@@ -133,7 +133,9 @@ session_start(); // Coloque isso bem no início do arquivo!
     </div>
 
     <footer class="footer text-center mt-5">
-        <p>&copy; 2025 Pizzaria. Todos os direitos reservados. Puc Minas Coração Eucarísitico</p>
+        <p>&copy; 2025 Pizzaria. PUC Minas - Unidade Coração Eucarístico.</p>
+        <p>Este é um trabalho acadêmico, sem fins lucrativos ou comerciais.</p>
+        <p>As imagens das pizzas são meramente ilustrativas e não reivindicamos sua autoria.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

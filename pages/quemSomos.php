@@ -21,7 +21,7 @@ session_start(); // Coloque isso bem no início do arquivo!
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="/index.php">
-                <img src="logo.png" alt="Logo da Pizzaria" style="width: 100px;">
+                <img id="siteLogo" alt="Logo da Pizzaria" style="width: 100px;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
@@ -69,21 +69,21 @@ session_start(); // Coloque isso bem no início do arquivo!
         <h2 class="text-center mb-5">Quem Somos</h2>
         <div class="row justify-content-center g-5">
 
-            <div class="col-md-5">
+            <div class="col-12 col-md-5">
                 <div class="card shadow-lg">
-                    <img src="quemsomos/teste.jpg" class="card-img-top" alt="membro 1">
+                    <img src="quemsomos/teste.jpg" class="card-img-top img-fluid" alt="membro 1" style="max-height: 300px; object-fit: cover;">
                     <div class="card-body text-center">
                         <h5 class="card-title">João Vítor de Freitas Scarlatelli</h5>
-                        <img src="quemsomos/teste.jpg" class="rounded-circle my-3" style="width: 120px; height: 120px; object-fit: cover;" alt="joao">
+                        <img src="quemsomos/M1.png" class="rounded-circle my-3 img-fluid" style="max-width: 100px; height: auto; object-fit: cover;" alt="joao">
                         <p class="card-text">Fundador da pizzaria, apaixonado por massas e responsável pelas receitas tradicionais da casa.</p>
                         <div class="social-icons mt-4">
-                            <a href="https://instagram.com/seu_usuario" target="_blank" class="text-dark me-3 text-decoration-none">
+                            <a href="https://www.instagram.com/jaummfreitas/" target="_blank" class="text-dark me-3 text-decoration-none">
                                 <i class="bi bi-instagram" style="font-size: 1.5rem;"></i>
                             </a>
-                            <a href="https://github.com/seu_usuario" target="_blank" class="text-dark me-3 text-decoration-none">
+                            <a href="https://github.com/Jaummfreitas" target="_blank" class="text-dark me-3 text-decoration-none">
                                 <i class="bi bi-github" style="font-size: 1.5rem;"></i>
                             </a>
-                            <a href="https://linkedin.com/in/seu_usuario" target="_blank" class="text-dark me-3 text-decoration-none">
+                            <a href="https://www.linkedin.com/in/joão-vítor-freitas-ba266025b/" target="_blank" class="text-dark me-3 text-decoration-none">
                                 <i class="bi bi-linkedin" style="font-size: 1.5rem;"></i>
                             </a>
                         </div>
@@ -91,27 +91,28 @@ session_start(); // Coloque isso bem no início do arquivo!
                 </div>
             </div>
 
-            <div class="col-md-5">
+            <div class="col-12 col-md-5">
                 <div class="card shadow-lg">
-                    <img src="quemsomos/teste.jpg" class="card-img-top" alt="membro 2">
+                    <img src="quemsomos/teste2.jpg" class="card-img-top img-fluid" alt="membro 2" style="max-height: 300px; object-fit: cover;">
                     <div class="card-body text-center">
                         <h5 class="card-title">Nagib Alexandre Verly Borjaili</h5>
-                        <img src="quemsomos/teste.jpg" class="rounded-circle my-3" style="width: 120px; height: 120px; object-fit: cover;" alt="nagib">
+                        <img src="quemsomos/M2.png" class="rounded-circle my-3 img-fluid" style="max-width: 100px; height: auto; object-fit: cover;" alt="nagib">
                         <p class="card-text">Chef de cozinha e responsável pelas criações exclusivas e sabores inovadores do nosso cardápio.</p>
                         <div class="social-icons mt-4">
-                            <a href="https://instagram.com/seu_usuario" target="_blank" class="text-dark me-3 text-decoration-none me-3">
+                            <a href="https://www.instagram.com/nagibverly/" target="_blank" class="text-dark me-3 text-decoration-none">
                                 <i class="bi bi-instagram" style="font-size: 1.5rem;"></i>
                             </a>
-                            <a href="https://github.com/seu_usuario" target="_blank" class="text-dark me-3 text-decoration-none me-3">
+                            <a href="https://github.com/NagibAlexandre" target="_blank" class="text-dark me-3 text-decoration-none">
                                 <i class="bi bi-github" style="font-size: 1.5rem;"></i>
                             </a>
-                            <a href="https://linkedin.com/in/seu_usuario" target="_blank" class="text-dark me-3 text-decoration-none">
+                            <a href="https://www.linkedin.com/in/nagibalexandre/" target="_blank" class="text-dark me-3 text-decoration-none">
                                 <i class="bi bi-linkedin" style="font-size: 1.5rem;"></i>
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
+
 
         </div>
     </div>
@@ -159,8 +160,10 @@ session_start(); // Coloque isso bem no início do arquivo!
     </div>
 
 
-    <footer class="footer bg-light text-center py-4 mt-5">
-        <p>&copy; 2025 Pizzaria. Todos os direitos reservados.</p>
+    <footer class="footer text-center mt-5">
+        <p>&copy; 2025 Pizzaria. PUC Minas - Unidade Coração Eucarístico.</p>
+        <p>Este é um trabalho acadêmico, sem fins lucrativos ou comerciais.</p>
+        <p>As imagens das pizzas são meramente ilustrativas e não reivindicamos sua autoria.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

@@ -29,7 +29,7 @@ function abrirModal(produto) {
   }
 
   produtoAtual = produto;
-  document.getElementById("imagemTamanhoPizza").src = "/images/tamanhos/brotinho.jpg"; // valor inicial
+  document.getElementById("imagemTamanhoPizza").src = "/images/tamanhos/brotinho.png"; // valor inicial
   document.getElementById("nomePizzaModal").innerText = produto.nome;
   new bootstrap.Modal(document.getElementById("modalTamanho")).show();
 }
@@ -164,13 +164,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
       switch (this.value) {
         case "brotinho":
-          imagem.src = `${basePath}/brotinho.jpg`;
+          imagem.src = `${basePath}/brotinho.png`;
           break;
         case "media":
-          imagem.src = `${basePath}/media.jpg`;
+          imagem.src = `${basePath}/media.png`;
           break;
         case "familia":
-          imagem.src = `${basePath}/familia.jpg`;
+          imagem.src = `${basePath}/familia.png`;
           break;
         default:
           imagem.src = "";

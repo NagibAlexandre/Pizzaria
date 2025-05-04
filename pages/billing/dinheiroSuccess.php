@@ -8,8 +8,8 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
-require_once '/vendor/autoload.php';
-require_once '/config.php';
+require_once '../../vendor/autoload.php';
+require_once '../../config.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     die('Acesso inválido.');
@@ -34,5 +34,8 @@ $stmt->execute([
     $total
 ]);
 
-echo "Pedido em dinheiro registrado com sucesso!";
+// Redirecionar para a página de acompanhamento após o sucesso
+header("Location: acompanhar.php");
+exit();
+
 ?>

@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['atualizar'])) {
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="/index.php">
-                <img src="logo.png" alt="Logo da Pizzaria" style="width: 100px;">
+                <img id="siteLogo" alt="Logo da Pizzaria" style="width: 100px;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['atualizar'])) {
         <div class="row g-3">
             <div class="col-md-4 border border-secondary rounded p-3">
                 <div class="text-center mb-4">
-                    <img src="/images/teste.jpg" class="img-fluid rounded-circle" style="width: 150px;" alt="Avatar">
+                    <img src="/images/profilePFP.png" class="img-fluid rounded-circle" style="width: 150px;" alt="Avatar">
                     <h4 class="mt-2"><?= htmlspecialchars($usuario['nome']) ?></h4>
                 </div>
                 <div class="d-grid gap-2">
