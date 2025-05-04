@@ -6,10 +6,9 @@ if (!isset($_SESSION['usuario'])) {
     header("Location: /pages/account/login.php");
     exit();
 }
-require_once '../../config.php';
 
 $stmt = $pdo->prepare("SELECT endereco_entrega FROM recibos WHERE id_usuario = ? ORDER BY id DESC LIMIT 1");
-$stmt->execute([1]);
+$stmt->execute([1]); // <-- aqui talvez você queira trocar o "1" por $_SESSION['usuario']['id']
 $endereco_usuario = $stmt->fetchColumn();
 
 $endereco_restaurante = "Avenida Dom José Gaspar - Coração Eucarístico - Belo Horizonte - Minas Gerais - 30535-610";
@@ -72,6 +71,15 @@ $endereco_restaurante = "Avenida Dom José Gaspar - Coração Eucarístico - Bel
             attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map);
 
+        const statusBox = document.getElementById("status-box");
+        const statusText = document.getElementById("status-pedido");
+
+        const atualizarStatus = (texto, classe) => {
+            statusText.textContent = texto;
+            statusBox.className = `alert ${classe}`;
+            statusText.style.color = window.getComputedStyle(statusBox).color;
+        };
+
         async function marcarEnderecos() {
             const buscarCoords = async (endereco) => {
                 const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(endereco)}`);
@@ -99,26 +107,50 @@ $endereco_restaurante = "Avenida Dom José Gaspar - Coração Eucarístico - Bel
                     padding: [50, 50]
                 });
             }
+
+            if (coordsRestaurante && coordsUsuario) {
+                const rotaUrl = `https://router.project-osrm.org/route/v1/driving/${coordsRestaurante[1]},${coordsRestaurante[0]};${coordsUsuario[1]},${coordsUsuario[0]}?overview=full&geometries=geojson`;
+
+                const resposta = await fetch(rotaUrl);
+                const rota = await resposta.json();
+
+                if (rota.routes && rota.routes.length > 0) {
+                    const coordsRota = rota.routes[0].geometry.coordinates.map(p => [p[1], p[0]]);
+                    L.polyline(coordsRota, {
+                        color: 'blue',
+                        weight: 4
+                    }).addTo(map);
+
+                    // Cria um ícone personalizado
+                    const carrinhoIcon = L.icon({
+                        iconUrl: 'https://cdn-icons-png.flaticon.com/512/1046/1046857.png',
+                        iconSize: [32, 32],
+                        iconAnchor: [16, 16]
+                    });
+
+                    let index = 0;
+                    const marker = L.marker(coordsRota[0], {
+                        icon: carrinhoIcon
+                    }).addTo(map);
+
+                    atualizarStatus("O pedido saiu para entrega!", "alert-warning");
+
+                    const moverCarrinho = () => {
+                        if (index < coordsRota.length) {
+                            marker.setLatLng(coordsRota[index]);
+                            index++;
+                            setTimeout(moverCarrinho, 100); // velocidade
+                        } else {
+                            atualizarStatus("O pedido chegou!", "alert-success");
+                        }
+                    };
+
+                    setTimeout(moverCarrinho, 2000); // espera 2 segundos antes de começar
+                }
+            }
         }
 
         marcarEnderecos();
-
-        const statusBox = document.getElementById("status-box");
-        const statusText = document.getElementById("status-pedido");
-
-        const atualizarStatus = (texto, classe) => {
-            statusText.textContent = texto;
-            statusBox.className = `alert ${classe}`;
-            statusText.style.color = window.getComputedStyle(statusBox).color;
-        };
-
-        setTimeout(() => {
-            atualizarStatus("O pedido saiu para entrega!", "alert-warning");
-        }, 5000);
-
-        setTimeout(() => {
-            atualizarStatus("O pedido chegou!", "alert-success");
-        }, 10000);
     </script>
     <script src="/scripts/togglemode.js"></script>
 </body>
