@@ -129,24 +129,38 @@ function removerItem(index) {
   localStorage.setItem("carrinho", JSON.stringify(carrinho));
   atualizarContadorCarrinho();
 
+  const lista = document.getElementById("listaCarrinho");
+  const totalEl = document.getElementById("totalCarrinho");
+  lista.innerHTML = "";
+  let total = 0;
+
+  carrinho.forEach((item, i) => {
+    total += item.preco;
+
+    const li = document.createElement("li");
+    li.className = "list-group-item d-flex justify-content-between align-items-center";
+
+    li.innerHTML = `
+      <div>
+        ${item.nome} (${item.tamanho}) - R$ ${item.preco.toFixed(2)}
+      </div>
+      <button class="btn btn-danger btn-sm" onclick="removerItem(${i})">
+        <i class="bi bi-x"></i>
+      </button>
+    `;
+
+    lista.appendChild(li);
+  });
+
+  totalEl.innerText = total.toFixed(2);
+
+  // Se o carrinho estiver vazio, feche o modal
   if (carrinho.length === 0) {
     const modalEl = document.getElementById("modalCarrinho");
     const modal = bootstrap.Modal.getInstance(modalEl);
-    if (modal) modal.hide();
-
-    setTimeout(() => {
-      document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
-
-      document.body.classList.remove('modal-open');
-      document.body.style.overflow = 'auto';
-      document.body.style.paddingRight = '';
-
-      modalEl.classList.remove('show');
-      modalEl.style.display = 'none';
-      modalEl.setAttribute('aria-hidden', 'true');
-    }, 350);
-  } else {
-    abrirCarrinho();
+    if (modal) {
+      modal.hide();
+    }
   }
 }
 

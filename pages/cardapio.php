@@ -11,7 +11,7 @@ session_start(); // Coloque isso bem no início do arquivo!
     <link rel="stylesheet" href="../styles/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <script src="/scripts/carrinho.js"></script>
+
     <script>
         const usuarioLogado = <?php echo isset($_SESSION['usuario']) ? 'true' : 'false'; ?>;
     </script>
@@ -146,6 +146,7 @@ session_start(); // Coloque isso bem no início do arquivo!
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/scripts/togglemode.js"></script>
+    <script src="/scripts/carrinho.js"></script>
 </body>
 
 </html>

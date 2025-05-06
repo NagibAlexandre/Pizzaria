@@ -8,7 +8,7 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 $stmt = $pdo->prepare("SELECT endereco_entrega FROM recibos WHERE id_usuario = ? ORDER BY id DESC LIMIT 1");
-$stmt->execute([1]); // <-- aqui talvez você queira trocar o "1" por $_SESSION['usuario']['id']
+$stmt->execute([$_SESSION['usuario']['id']]); // <-- aqui talvez você queira trocar o "1" por $_SESSION['usuario']['id']
 $endereco_usuario = $stmt->fetchColumn();
 
 $endereco_restaurante = "Avenida Dom José Gaspar - Coração Eucarístico - Belo Horizonte - Minas Gerais - 30535-610";
